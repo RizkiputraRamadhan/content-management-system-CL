@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
         // Daftar gambar acak
         $images = ['image-1.jpg', 'image-2.jpg', 'image-3.jpg', 'image-4.jpg', 'image-5.jpg', 'image-6.jpg'];
 
-        $userIds = [16, 18, 19, 20, 21, 22, 23];
+        $userIds = [1, 2, 3, 4, 5];
 
         $categories = PostCategory::all();
         $tags = PostTags::all();

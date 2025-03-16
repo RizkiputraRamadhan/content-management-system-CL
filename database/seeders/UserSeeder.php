@@ -12,52 +12,52 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        # Daftar permissions
+        # Daftar semua permissions berdasarkan data di tabel Anda
         $permissions = [
-            'view users',
-            'create users',
-            'edit users',
-            'delete users',
-            'view posts',
-            'create posts',
-            'edit posts',
-            'delete posts',
-            'manage roles',
-            'manage permissions', 
+            'view users', 'create users', 'edit users', 'delete users',
+            'view posts', 'create posts', 'edit posts', 'delete posts',
+            'manage roles', 'manage permissions',
+            'manage web identities',
+            'view pages', 'create pages', 'edit pages', 'delete pages',
+            'view menu', 'create menu', 'edit menu', 'delete menu',
+            'view categories', 'create categories', 'edit categories', 'delete categories',
+            'view tags', 'create tags', 'edit tags', 'delete tags',
+            'view album', 'create album', 'edit album', 'delete album',
+            'view video', 'create video', 'edit video', 'delete video',
+            'view information', 'create information', 'edit information', 'delete information',
         ];
 
-        # Buat permissions
+        # Buat permissions kalau belum ada
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
 
         # Definisikan roles beserta permissions-nya
         $roles = [
-            'admin' => [
-                'view users',
-                'create users',
-                'edit users',
-                'delete users',
-                'view posts',
-                'create posts',
-                'edit posts',
-                'delete posts',
-                'manage roles', 
-                'manage permissions', 
-            ],
+            'admin' => $permissions, 
             'editor' => [
-                'view posts',
-                'create posts',
-                'edit posts',
-                'delete posts',
+                'view posts', 'create posts', 'edit posts', 'delete posts',
+                'view pages', 'create pages', 'edit pages', 'delete pages',
+                'view menu', 'create menu', 'edit menu', 'delete menu',
+                'view categories', 'create categories', 'edit categories', 'delete categories',
+                'view tags', 'create tags', 'edit tags', 'delete tags',
+                'view album', 'create album', 'edit album', 'delete album',
+                'view video', 'create video', 'edit video', 'delete video',
+                'view information', 'create information', 'edit information', 'delete information',
             ],
             'contributor' => [
-                'view posts',
-                'create posts',
-                'edit posts',
+                'view posts', 'create posts', 'edit posts',
+                'view pages', 'create pages', 'edit pages',
+                'view menu', 'create menu', 'edit menu',
+                'view categories', 'create categories', 'edit categories',
+                'view tags', 'create tags', 'edit tags',
+                'view album', 'create album', 'edit album',
+                'view video', 'create video', 'edit video',
+                'view information', 'create information', 'edit information',
             ],
-            'user' => [ 
-                'view posts',
+            'user' => [
+                'view posts', 'view pages', 'view menu', 'view categories', 
+                'view tags', 'view album', 'view video', 'view information',
             ],
         ];
 
