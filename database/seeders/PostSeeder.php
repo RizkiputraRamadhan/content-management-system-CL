@@ -6,47 +6,60 @@ use Illuminate\Database\Seeder;
 use App\Models\Posts;
 use App\Models\PostCategory;
 use App\Models\PostTags;
-use App\Models\User;
 use Illuminate\Support\Str;
-use Faker\Factory as Faker;
 
 class PostSeeder extends Seeder
 {
     public function run()
     {
+        $titles = [
+            'Suscipit fugiat fugit voluptatem placeat recusandae.',
+            'Pemerintah Resmikan Jalan Tol Baru di Wilayah Barat.',
+            'Kebakaran Hebat Hanguskan Pasar Tradisional Semalam.',
+            'Inovasi Teknologi Baru Siap Guncang Dunia Startup.',
+            'Tim Nasional Raih Kemenangan Dramatis di Final.',
+            'Harga Bahan Pokok Melonjak Jelang Ramadhan.',
+            'Peneliti Temukan Spesies Baru di Hutan Kalimantan.',
+            'Warga Keluhkan Banjir yang Kian Parah di Musim Hujan.',
+            'Kecelakaan Beruntun Terjadi di Jalan Raya Pagi Tadi.',
+            'Festival Budaya Lokal Menarik Ribuan Pengunjung.',
+            'Perkembangan Ekonomi Digital Capai Rekor Tertinggi.',
+            'Polisi Amankan Pelaku Penipuan Berkedok Investasi.',
+            'Kondisi Cuaca Ekstrem Diprediksi Landa Wilayah Selatan.',
+            'Selebriti Tanah Air Umumkan Pernikahan Secara Mendadak.',
+            'Pemerintah Siapkan Kebijakan Baru untuk Sektor Pendidikan.',
+            'Pasar Modal Menguat, IHSG Ditutup di Zona Hijau.',
+            'Kampanye Lingkungan Hidup Galang Ribuan Relawan.',
+            'Perusahaan Teknologi Global Buka Kantor di Indonesia.',
+            'Tren Fashion Musim Ini Dominasi Warna Pastel.',
+            'Masyarakat Antusias Sambut Malam Tahun Baru.'
+        ];
 
-        $faker = Faker::create('id_ID'); 
-
-        // Daftar gambar acak
         $images = ['image-1.jpg', 'image-2.jpg', 'image-3.jpg', 'image-4.jpg', 'image-5.jpg', 'image-6.jpg'];
-
+        $statusList = ['active', 'inactive'];
         $userIds = [1, 2, 3, 4, 5];
 
         $categories = PostCategory::all();
         $tags = PostTags::all();
 
-        // Buat 100 berita
         for ($i = 0; $i < 100; $i++) {
-            $title = $faker->sentence(8); 
-            $slug = Str::slug($title);
-            $image = $faker->randomElement($images); 
-            $content = $this->generateRandomContent($faker);
-            $status = $faker->randomElement(['active', 'inactive']);
-            $createdBy = $faker->randomElement($userIds);
-            $counter = $faker->numberBetween(1, 1000);
-            $publishedAt = $faker->dateTimeBetween('-1 year', 'now');
+            $title = $titles[array_rand($titles)];
+            $slug = Str::slug($title . '-' . Str::random(5));
+            $image = $images[array_rand($images)];
+            $status = $statusList[array_rand($statusList)];
+            $createdBy = $userIds[array_rand($userIds)];
+            $counter = rand(1, 1000);
+            $publishedAt = date('Y-m-d H:i:s', strtotime('-' . rand(1, 365) . ' days'));
 
             $categoryIds = $categories->random(rand(1, 2))->pluck('id')->toArray();
-
-            $tagIds = $tags->random(rand(1, 2))->pluck('id')->toArray();
+            $tagIds = $tags->random(rand(1, 3))->pluck('id')->toArray();
             $tagsJson = json_encode($tagIds);
 
-            // Simpan data ke tabel posts
             Posts::create([
                 'title' => $title,
                 'slug' => $slug,
                 'image' => $image,
-                'content' => $content,
+                'content' => $this->generateRandomContent(),
                 'status' => $status,
                 'created_by' => $createdBy,
                 'category_id' => $categoryIds[0] ?? null,
@@ -59,24 +72,30 @@ class PostSeeder extends Seeder
         }
     }
 
-    /**
-     * Generate konten acak dengan HTML untuk text editor
-     */
-    private function generateRandomContent($faker)
+    private function generateRandomContent()
     {
-        $paragraphs = $faker->paragraphs(3); 
-        $content = '<h2>' . $faker->sentence() . '</h2>'; 
-        foreach ($paragraphs as $paragraph) {
+        $sampleParagraphs = [
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet.',
+            'Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.',
+            'In condimentum facilisis porta. Sed nec diam eu diam mattis viverra.',
+            'Nulla fringilla, orci ac euismod semper, magna diam.',
+            'Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis.'
+        ];
+
+        $content = '<h2>' . ucfirst($sampleParagraphs[array_rand($sampleParagraphs)]) . '</h2>';
+        foreach (array_slice($sampleParagraphs, 0, rand(2, 4)) as $paragraph) {
             $content .= '<p>' . $paragraph . '</p>';
         }
         $content .= '<ul>';
         for ($i = 0; $i < 3; $i++) {
-            $content .= '<li>' . $faker->sentence() . '</li>';
+            $content .= '<li>Poin penting terkait topik ini #' . ($i + 1) . '</li>';
         }
         $content .= '</ul>';
-        if ($faker->boolean(70)) { 
+
+        if (rand(0, 1)) {
             $content .= '<img src="https://picsum.photos/600/400" alt="Random Image" />';
         }
+
         return $content;
     }
 }
