@@ -16,8 +16,7 @@ use App\Http\Controllers\Admin\RolePermissionController;
 use App\Http\Controllers\Admin\UploadImageEditor;
 use App\Http\Controllers\Admin\VideosController;
 use App\Http\Controllers\Client\InterfaceController;
-
-
+use App\Http\Middleware\IsActive;
 
 # Auth
 Route::group(['prefix' => 'portal', 'controller' => LoginController::class], function () {
@@ -162,8 +161,13 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth']], function () {
 
 });
 
+#maintenance
+Route::get('/maintenance', function () {
+    return view('pages.client.maintenance');
+});
+
 #client
-Route::group(['prefix' => '/', 'controller' => InterfaceController::class], function () {
+Route::group(['prefix' => '/', 'controller' => InterfaceController::class, 'middleware' => IsActive::class], function () {
     #dinamis
     Route::get('/', 'beranda')->name('beranda');
     Route::get('/search', 'search')->name('search');
