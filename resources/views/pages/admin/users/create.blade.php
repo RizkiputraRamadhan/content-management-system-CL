@@ -14,7 +14,7 @@
                     <div class="row m-t-20">
                         <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Nama <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" required
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Password <span class="text-danger">*</span></label>
                                     <input type="password" name="password" id="pass2" class="form-control" required

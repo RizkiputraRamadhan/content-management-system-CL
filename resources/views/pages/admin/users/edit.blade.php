@@ -15,7 +15,7 @@
                         <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Nama <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" required
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 col-xs-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input type="password" name="password" id="pass2" class="form-control"

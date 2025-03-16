@@ -1,5 +1,5 @@
 <section class="shadow-sm shadow-gray-50" style="background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 0% 0% / 64px 64px, radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 32px 32px / 64px 64px, linear-gradient(#f2f2f2 2px, transparent 2px) 0px -1px / 32px 32px, linear-gradient(90deg, #f2f2f2 2px, #ffffff 2px) -1px 0px / 32px 32px #ffffff; background-size: 64px 64px, 64px 64px, 32px 32px, 32px 32px; background-color: #ffffff;">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-2 py-6 sm:px-6 lg:px-8">
         <div class="header-title flex flex-col justify-between items-start border-b-2 border-dashed border-gray-200 pb-4 mb-4">
             <div class="text-sm text-gray-500 flex items-center mb-2">
                 {{ $segment }} <span class="mx-1">

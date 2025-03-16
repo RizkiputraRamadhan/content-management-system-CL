@@ -71,7 +71,7 @@
                                 <div class="mx-auto {{ $item->id == $video->id ? 'border border-dashed border-green-400' : ''}} w-full rounded-lg shadow-sm  p-2 mb-2">
                                     <div class="flex space-x-3">
                                         <a href="{{ route('video_detail', $item->slug) }}"
-                                            class="lg:w-40 lg:h-28 w-30 h-20 object-cover rounded-lg overflow-hidden">
+                                            class="lg:w-40  w-30 object-cover rounded-lg overflow-hidden">
                                             <img src="{{ asset('storage/videos/' . $item->image) }}"
                                                 alt="{{ $item->title }}" class="w-full h-full object-cover">
                                         </a>

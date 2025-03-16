@@ -37,7 +37,6 @@
 
 <body>
     <div class="min-h-full">
-
         @include('widget.client.navbar')
         @include('widget.client.header')
         <main>

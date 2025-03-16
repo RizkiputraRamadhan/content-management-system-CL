@@ -88,8 +88,8 @@ class MetaServiceProvider extends ServiceProvider
             } elseif (isset($data['info'])) {
                 $content = $data['info'];
                 $defaultMeta['meta_title'] = $content->title ?? $defaultMeta['meta_title'];
-                $defaultMeta['meta_description'] = $this->cleanText($content->description ?? $content->title);
-                $defaultMeta['meta_keywords'] = $defaultMeta['meta_keywords'] . ', ' . $content->title;
+                $defaultMeta['meta_description'] = $defaultMeta['meta_keywords'] ?? $this->cleanText($content->description ?? $content->title);
+                $defaultMeta['meta_keywords'] = $defaultMeta['meta_keywords'] ;
             } elseif (isset($data['banner'])) {
                 $content = $data['banner'];
                 $defaultMeta['meta_title'] = $content->title ?? $defaultMeta['meta_title'];

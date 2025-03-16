@@ -77,7 +77,7 @@
                                         data-carousel-news-prev>
                                         <span
                                             class="inline-flex items-center justify-center lg:w-10 lg:h-10 w-8 h-8 rounded-full bg-slate-100  group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                            <svg class="lg:w-4 lg:h-4 w-2 h-2 text-white dark:text-gray-800 rtl:rotate-180"
+                                            <svg class="lg:w-4 lg:h-4 w-2 h-2 text-gray-800 rtl:rotate-180"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 6 10">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -91,7 +91,7 @@
                                         data-carousel-news-next>
                                         <span
                                             class="inline-flex items-center justify-center lg:w-10 lg:h-10 w-8 h-8 rounded-full bg-slate-100  group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                            <svg class="lg:w-4 lg:h-4 w-2 h-2 text-white dark:text-gray-800 rtl:rotate-180"
+                                            <svg class="lg:w-4 lg:h-4 w-2 h-2 text-gray-800 rtl:rotate-180"
                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 6 10">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"

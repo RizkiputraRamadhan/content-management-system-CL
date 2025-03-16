@@ -28,12 +28,12 @@
                         <div class="space-y-10 my-3">
                             <article class="space-y-8">
                                 <div class="space-y-6">
-                                    <div class="flex flex-col items-start justify-between w-full md:flex-row md:items-center text-gray-400 dark:text-gray-600">
-                                        <div class="flex items-center md:space-x-2">
+                                    <div class="flex flex-col items-start justify-between w-full md:flex-row md:items-center text-gray-600">
+                                        <div class="flex items-center space-x-2">
                                             <img src="{{ $post->createdBy->image ? asset('storage/' . $post->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                                 alt="" class="w-8 h-8 rounded-full">
                                             <a href="/author/{{ $post->createdBy->slug }}"
-                                                class="text-sm hover:font-semibold">{{ $post->createdBy->name }}</a>
+                                                class="text-sm font-semibold ">{{ $post->createdBy->name }}</a>
                                         </div>
                                         <p class="flex-shrink-0 mt-3 text-sm md:mt-0">
                                             {{ \Carbon\Carbon::parse($post->published_at)->locale('id')->translatedFormat('l, d M Y') }} • {{ $post->counter }} views
