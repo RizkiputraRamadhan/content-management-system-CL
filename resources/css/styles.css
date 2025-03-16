@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+
+body {
+    font-family: 'PT Sans', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.fas {
+    font-weight: 900;
+    font-size: large;
+}
+
+.panel-action {
+    margin: 0 0 10px 0;
+}
+
+/* start scroll header */
+
+/* X */
+
+.custom-scrollbar-x {
+    overflow-x: hidden;
+    transition: overflow 0.3s ease-in-out;
+}
+
+.custom-scrollbar-x:hover {
+    overflow-x: auto;
+}
+
+.custom-scrollbar-x::-webkit-scrollbar {
+    height: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.custom-scrollbar-x:hover::-webkit-scrollbar {
+    opacity: 1;
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+    border-radius: 10px;
+}
+
+.custom-scrollbar-x::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* Y */
+
+.custom-scrollbar-y {
+    overflow-y: hidden;
+    transition: overflow 0.3s ease-in-out;
+}
+
+.custom-scrollbar-y:hover {
+    overflow-y: auto;
+}
+
+.custom-scrollbar-y::-webkit-scrollbar {
+    width: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.custom-scrollbar-y:hover::-webkit-scrollbar {
+    opacity: 1;
+}
+
+.custom-scrollbar-y::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.custom-scrollbar-y::-webkit-scrollbar-thumb {
+    background: #dfdfdf;
+    border-radius: 10px;
+}
+
+.custom-scrollbar-y::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* end scroll header */
+

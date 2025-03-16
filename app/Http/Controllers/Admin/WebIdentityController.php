@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\WebIdentity;
+use Illuminate\Http\Request;
+
+class WebIdentityController extends Controller
+{
+    # Menampilkan form untuk create atau update identitas web
+    public function index()
+    {
+        $webIdentity = WebIdentity::first(); 
+        return view('pages.admin.web-identities.index', compact('webIdentity'))->with('page', 'Identitas Web');
+    }
+
+    # Menyimpan atau memperbarui identitas web
+    public function storeOrUpdate(Request $request)
+    {
+        $request->validate([
+            'web_name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'domain' => 'nullable|url|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'facebook_link' => 'nullable|url|max:255',
+            'instagram_link' => 'nullable|url|max:255',
+            'youtube_link' => 'nullable|url|max:255',
+            'twitter_link' => 'nullable|url|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
+            'meta_keywords' => 'nullable|string|max:255',
+            'og_image' => 'nullable|image|max:2048',
+            'google_maps' => 'nullable|string|max:255',
+            'favicon' => 'nullable|image|max:2048',
+            'logo' => 'nullable|image|max:2048',
+            'status' => 'nullable|in:active,inactive',
+            'version' => 'nullable|string|max:50',
+        ], [
+            'domain.url' => 'Domain harus berupa URL yang valid.',
+            'facebook_link.url' => 'Tautan Facebook harus berupa URL yang valid.',
+            'instagram_link.url' => 'Tautan Instagram harus berupa URL yang valid.',
+            'youtube_link.url' => 'Tautan YouTube harus berupa URL yang valid.',
+            'twitter_link.url' => 'Tautan Twitter harus berupa URL yang valid.',
+            'og_image.image' => 'OG Image harus berupa file gambar.',
+            'og_image.max' => 'Ukuran OG Image tidak boleh lebih dari 2MB.',
+            'favicon.image' => 'Favicon harus berupa file gambar.',
+            'logo.image' => 'Logo harus berupa file gambar.',
+            'favicon.max' => 'Ukuran favicon tidak boleh lebih dari 2MB.',
+            'logo.max' => 'Ukuran logo tidak boleh lebih dari 2MB.',
+        ]);
+
+        $data = $request->except(['favicon', 'logo', 'og_image']); 
+
+        // Handle favicon upload
+        if ($request->hasFile('favicon') && $request->file('favicon')->isValid()) {
+            $faviconPath = $request->file('favicon')->store('public/web-identities');
+            $data['favicon'] = basename($faviconPath); 
+        }
+
+        // Handle logo upload
+        if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+            $logoPath = $request->file('logo')->store('public/web-identities');
+            $data['logo'] = basename($logoPath); 
+        }
+
+        // Handle og_image upload
+        if ($request->hasFile('og_image') && $request->file('og_image')->isValid()) {
+            $ogImagePath = $request->file('og_image')->store('public/web-identities');
+            $data['og_image'] = basename($ogImagePath); 
+        }
+
+        $webIdentity = WebIdentity::first();
+        if ($webIdentity) {
+            $webIdentity->update($data);
+            return redirect()->back()->with('success', 'Identitas web berhasil diperbarui.');
+        } else {
+            WebIdentity::create($data);
+            return redirect()->back()->with('success', 'Identitas web berhasil dibuat.');
+        }
+    }
+}
