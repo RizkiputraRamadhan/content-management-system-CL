@@ -32,15 +32,15 @@ class MenusController extends Controller
     {
         $menu = Menus::findOrFail($id);
         $data = [
-            'menu' => $menu,
+            'edit' => $menu,
             'parent' => Menus::where('type_1', 'parent')->get(),
             'pages' => Page::orderBy('id', 'desc')->get(),
         ];
     
         if ($menu->type_2 === 'page' && $menu->slug) {
-            $page = Page::where('slug', $menu->slug)->first(); // Menggunakan first() untuk mendapatkan satu record
+            $page = Page::where('slug', $menu->slug)->first();
             if ($page) {
-                $data['selected_page_id'] = $page->id; // Tambahkan page_id yang dipilih ke data
+                $data['selected_page_id'] = $page->id; 
             }
         }
     

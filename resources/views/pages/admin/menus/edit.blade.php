@@ -18,12 +18,12 @@
                     <h3 class="panel-title">Perbarui {{ $page }}</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{{ route('menu.update', $menu->id) }}" method="POST">
+                    <form action="{{ route('menu.update', $edit->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label for="name">Nama Menu</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $menu->name) }}" required>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $edit->name) }}" required>
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -32,8 +32,8 @@
                         <div class="form-group">
                             <label for="type_1">Tipe Menu</label>
                             <select name="type_1" id="type_1" class="form-control" required>
-                                <option value="parent" {{ old('type_1', $menu->type_1) === 'parent' ? 'selected' : '' }}>Menu Utama</option>
-                                <option value="submenu" {{ old('type_1', $menu->type_1) === 'submenu' ? 'selected' : '' }}>Submenu</option>
+                                <option value="parent" {{ old('type_1', $edit->type_1) === 'parent' ? 'selected' : '' }}>Menu Utama</option>
+                                <option value="submenu" {{ old('type_1', $edit->type_1) === 'submenu' ? 'selected' : '' }}>Submenu</option>
                             </select>
                             @error('type_1')
                                 <span class="text-danger">{{ $message }}</span>
@@ -43,8 +43,8 @@
                         <div class="form-group">
                             <label for="type_2">Tipe Konten</label>
                             <select name="type_2" id="type_2" class="form-control" required>
-                                <option value="page" {{ old('type_2', $menu->type_2) === 'page' ? 'selected' : '' }}>Halaman</option>
-                                <option value="link" {{ old('type_2', $menu->type_2) === 'link' ? 'selected' : '' }}>Link</option>
+                                <option value="page" {{ old('type_2', $edit->type_2) === 'page' ? 'selected' : '' }}>Halaman</option>
+                                <option value="link" {{ old('type_2', $edit->type_2) === 'link' ? 'selected' : '' }}>Link</option>
                             </select>
                             @error('type_2')
                                 <span class="text-danger">{{ $message }}</span>
@@ -70,9 +70,9 @@
                             <label for="parent_id">Parent Menu</label>
                             <select name="parent_id" id="parent_id" class="form-control">
                                 <option value="">Pilih Menu Utama</option>
-                                @foreach($parent as $menuItem)
-                                    <option value="{{ $menuItem->id }}" {{ old('parent_id', $menu->parent_id) == $menuItem->id ? 'selected' : '' }}>
-                                        {{ $menuItem->name }}
+                                @foreach($parent as $editItem)
+                                    <option value="{{ $editItem->id }}" {{ old('parent_id', $edit->parent_id) == $editItem->id ? 'selected' : '' }}>
+                                        {{ $editItem->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -83,7 +83,7 @@
 
                         <div class="form-group">
                             <label for="slug">Slug/Link</label>
-                            <input type="text" name="slug" id="slug" class="form-control" value="{{ old('slug', $menu->slug) }}" required>
+                            <input type="text" name="slug" id="slug" class="form-control" value="{{ old('slug', $edit->slug) }}" required>
                             @error('slug')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -92,8 +92,8 @@
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" id="status" class="form-control">
-                                <option value="active" {{ old('status', $menu->status) === 'active' ? 'selected' : '' }}>Active</option>
-                                <option value="inactive" {{ old('status', $menu->status) === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                <option value="active" {{ old('status', $edit->status) === 'active' ? 'selected' : '' }}>Active</option>
+                                <option value="inactive" {{ old('status', $edit->status) === 'inactive' ? 'selected' : '' }}>Inactive</option>
                             </select>
                             @error('status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -134,7 +134,7 @@
                     if (selectedPage && selectedPage.value) {
                         slugInput.value = selectedPage.getAttribute('data-slug') || '';
                     } else {
-                        slugInput.value = '{{ old('slug', $menu->slug) }}';
+                        slugInput.value = '{{ old('slug', $edit->slug) }}';
                     }
                 } else {
                     pageGroup.classList.add('hidden');
@@ -154,7 +154,7 @@
                 if (type2Select.value === 'page' && selectedPage && selectedPage.value) {
                     slugInput.value = selectedPage.getAttribute('data-slug') || '';
                 } else {
-                    slugInput.value = '{{ old('slug', $menu->slug) }}';
+                    slugInput.value = '{{ old('slug', $edit->slug) }}';
                 }
             });
         });
