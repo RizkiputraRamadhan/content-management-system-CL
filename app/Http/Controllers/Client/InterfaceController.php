@@ -81,6 +81,7 @@ class InterfaceController extends Controller
 
         $query = Posts::where('category_id', $category->id)
                     ->whereNotNull('published_at')
+                    ->where('status', 'active')
                     ->where('published_at', '<=', Carbon::now())
                     ->latest('published_at');
 
@@ -115,6 +116,7 @@ class InterfaceController extends Controller
 
         $query = Posts::where('created_by', $author->id)
                     ->whereNotNull('published_at')
+                    ->where('status', 'active')
                     ->where('published_at', '<=', Carbon::now())
                     ->latest('published_at');
 
@@ -185,7 +187,7 @@ class InterfaceController extends Controller
             abort(404);
         }
 
-        $post = Posts::where('slug', $post)->first();
+        $post = Posts::where('slug', $post)->where('status', 'active')->first();
         if (!$post) {
             abort(404);
         }
@@ -365,7 +367,7 @@ class InterfaceController extends Controller
 
     #page detail
     public function page_detail($slug) {
-        $page = Page::where('slug', $slug)->latest('created_at')->first();
+        $page = Page::where('slug', $slug)->where('status', 'active')->latest('created_at')->first();
         if (!$page) {
             abort(404);
         }

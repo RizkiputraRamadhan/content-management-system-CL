@@ -86,12 +86,8 @@
                         },
                     })
                     .then(response => {
-                        if (response.ok) {
-                            window.location.href =
-                                '/portal/login'; 
-                        } else {
-                            Swal.fire('Error!', 'Gagal logout. Coba lagi.', 'error');
-                        }
+                        window.location.href = '/portal/login'; 
+                        
                     })
                     .catch(error => {
                         Swal.fire('Error!', 'Terjadi kesalahan. Coba lagi.', 'error');
