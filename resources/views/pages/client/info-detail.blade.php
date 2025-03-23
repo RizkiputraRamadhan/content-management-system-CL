@@ -33,7 +33,7 @@
                         </h1>
                         <div class="flex items-center justify-between mt-2 text-gray-600 text-sm">
                             <div class="flex items-center gap-2">
-                                <img src="{{ $info->createdBy->image ? asset('storage/' . $info->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                <img src="{{ $info->createdBy->image ? getFile($info->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                     alt="" class="w-8 h-8 rounded-full">
                                 <a class="hover:text-blue-600">{{ $info->createdBy->name }}</a>
                             </div>

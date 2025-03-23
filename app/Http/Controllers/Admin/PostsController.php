@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Models\Posts;
 use App\Models\PostTags;
 use Illuminate\Support\Str;
@@ -46,13 +47,9 @@ class PostsController extends Controller
         $validatedData['slug'] = Str::slug($request->title);
 
         if ($request->hasFile('image')) {
-            $validatedData['image'] = $request->file('image')->store('posts', 'public');
+            $validatedData['image'] = FileHelper::saveFile($request->file('image'), 'posts', 'image');
         }
 
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $logoPath = $request->file('image')->store('public/posts');
-            $validatedData['image'] = basename($logoPath);
-        }
 
         if ($request->has('tags')) {
             $validatedData['tags'] = json_encode($request->tags);
@@ -91,9 +88,8 @@ class PostsController extends Controller
             $post = Posts::findOrFail($id);
             $validatedData['slug'] = Str::slug($request->title);
 
-            if ($request->hasFile('image') && $request->file('image')->isValid()) {
-                $logoPath = $request->file('image')->store('public/posts');
-                $validatedData['image'] = basename($logoPath);
+            if ($request->hasFile('image')) {
+                $validatedData['image'] = FileHelper::saveFile($request->file('image'), 'posts', 'image');
             }
 
             if ($request->has('tags')) {

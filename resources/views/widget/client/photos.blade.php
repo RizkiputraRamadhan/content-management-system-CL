@@ -6,16 +6,16 @@
                 @foreach ($data as $item)
                     <!-- Column -->
                     <div class="col-span-6 md:col-span-6 h-38 lg:col-span-3 relative group">
-                        <a href="{{ asset('storage/albums/' . $item->album_id . '/' . $item->image) }}"
+                        <a href="{{ getFile($item->image) }}"
                             class="block w-full h-full">
                             <img class="w-full h-full object-cover object-center max-w-full rounded-lg"
-                                src="{{ asset('storage/albums/' . $item->album_id . '/' . $item->image) }}"
+                                src="{{ getFile($item->image) }}"
                                 alt="{{ $item->title ?? 'image-photo' }}" />
                         </a>
                         <!-- Ikon Play dari Lucide -->
                         <div
                             class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
-                            <a href="{{ asset('storage/albums/' . $item->album_id . '/' . $item->image) }}"
+                            <a href="{{ getFile($item->image) }}"
                                 data-lightbox="{{ $item->album_id }}"
                                 data-title="{{ $item->album->name ?? 'Galery Image' }}"
                                 class="rounded-full p-2 bg-gray-700 cursor-pointer transition-all duration-300">

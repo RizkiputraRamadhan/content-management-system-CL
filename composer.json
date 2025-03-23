@@ -29,7 +29,9 @@
         },
         "files": [
             "app/Helpers/MenuHelper.php",
-            "app/Helpers/SlugHelper.php"
+            "app/Helpers/SlugHelper.php",
+            "app/Helpers/GetFileHelper.php",
+            "app/Helpers/FileHelper.php"
         ]
     },
     "autoload-dev": {

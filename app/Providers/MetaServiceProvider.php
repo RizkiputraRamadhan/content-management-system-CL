@@ -63,9 +63,9 @@ class MetaServiceProvider extends ServiceProvider
                         $defaultMeta['meta_title'] = $webIdentity->meta_title ?? $defaultMeta['meta_title'];
                         $defaultMeta['meta_description'] = $webIdentity->meta_description ?? $defaultMeta['meta_description'];
                         $defaultMeta['meta_keywords'] = $webIdentity->meta_keywords ?? $defaultMeta['meta_keywords'];
-                        $defaultMeta['og_image'] = $webIdentity->og_image ? asset('storage/web-identities/' . $webIdentity->og_image) : $defaultMeta['og_image'];
-                        $defaultMeta['favicon'] = $webIdentity->favicon ? asset('storage/web-identities/' . $webIdentity->favicon) : $defaultMeta['favicon'];
-                        $defaultMeta['logo'] = $webIdentity->logo ? asset('storage/web-identities/' . $webIdentity->logo) : $defaultMeta['logo'];
+                        $defaultMeta['og_image'] = $webIdentity->og_image ? getFile($webIdentity->og_image) : $defaultMeta['og_image'];
+                        $defaultMeta['favicon'] = $webIdentity->favicon ? getFile($webIdentity->favicon) : $defaultMeta['favicon'];
+                        $defaultMeta['logo'] = $webIdentity->logo ? getFile($webIdentity->logo) : $defaultMeta['logo'];
                         $defaultMeta['status'] = $webIdentity->status ?? $defaultMeta['status'];
                         $defaultMeta['version'] = $webIdentity->version ?? $defaultMeta['version'];
                     }
@@ -100,13 +100,13 @@ class MetaServiceProvider extends ServiceProvider
                 $defaultMeta['meta_title'] = $content->title ?? $defaultMeta['meta_title'];
                 $defaultMeta['meta_description'] = $this->cleanText($content->description ?? $content->title);
                 $defaultMeta['meta_keywords'] = $defaultMeta['meta_keywords'] . ', ' . $content->title;
-                $defaultMeta['og_image'] = $content->image ? asset('storage/videos/' . $content->image) : $defaultMeta['og_image'];
+                $defaultMeta['og_image'] = $content->image ? getFile($content->image) : $defaultMeta['og_image'];
             } elseif (isset($data['post'])) {
                 $content = $data['post'];
                 $defaultMeta['meta_title'] = $content->title ?? $defaultMeta['meta_title'];
                 $defaultMeta['meta_description'] = $this->cleanText($content->description ?? $content->title);
                 $defaultMeta['meta_keywords'] = $defaultMeta['meta_keywords'] . ', ' . $content->title;
-                $defaultMeta['og_image'] = $content->image ? asset('storage/posts/' . $content->image) : $defaultMeta['og_image'];
+                $defaultMeta['og_image'] = $content->image ? getFile($content->image) : $defaultMeta['og_image'];
             }
 
             $view->with('meta', (object) $defaultMeta);

@@ -8,7 +8,7 @@
                         class='max-w-sm  w-73  cursor-pointer focus:cursor-wait hover:text-blue-400 bg-white shadow rounded-lg p-4'>
                         <div class="bg-gray-300 h-48 w-65 rounded-lg mb-3">
                             <img class="w-full h-full object-cover rounded-lg"
-                                src="{{ asset('storage/videos/' . $item->image) }}" alt="">
+                                src="{{ getFile($item->image) }}" alt="">
                         </div>
                         <div class='w-full flex justify-between items-start'>
                             <div class="block">

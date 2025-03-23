@@ -33,7 +33,7 @@
                         </h1>
                         <div class="flex items-center justify-between mt-2 text-gray-600 text-sm">
                             <div class="flex items-center gap-2">
-                                <img src="{{ $banner->createdBy->image ? asset('storage/' . $banner->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                <img src="{{ $banner->createdBy->image ? getFile($banner->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                     alt="" class="w-8 h-8 rounded-full">
                                 <a class="hover:text-blue-600">{{ $banner->createdBy->name }}</a>
                             </div>
@@ -48,7 +48,7 @@
             <div
                 class="lg:-mt-1 -mt-15 lg:-ml-12 lg:p-3 lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden image-container">
                 <img class="w-full rounded-sm bg-gray-900 ring-1 shadow-lg ring-gray-400/10 sm:w-[57rem] post-image"
-                    src="{{ asset('storage/banners/' . $banner->image) }}" alt="">
+                    src="{{ getFile($banner->image) }}" alt="">
             </div>
 
             <div
@@ -71,7 +71,7 @@
                         <div class="mx-auto w-full rounded mb-2 relative group">
                             <div class="flex space-x-4">
                                 <div class="w-full h-30 lg:h-50 rounded bg-gray-200 relative overflow-hidden">
-                                    <img src="{{ asset('storage/banners/' . $item->image) }}" alt="{{ $item->title }}"
+                                    <img src="{{ getFile($item->image) }}" alt="{{ $item->title }}"
                                         class="w-full h-full object-cover rounded transition-opacity duration-300 group-hover:opacity-80">
                                     <div
                                         class="absolute inset-0 flex items-center justify-center bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">

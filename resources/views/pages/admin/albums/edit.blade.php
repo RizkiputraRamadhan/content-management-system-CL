@@ -41,7 +41,7 @@
                             <div class="existing-photos mt-3">
                                 @foreach ($album->photos as $photo)
                                     <div class="photo-wrapper" style="display: inline-block; margin: 5px;" id="photo-{{ $photo->id }}">
-                                        <img src="{{ asset('storage/albums/' . $album->id . '/' . $photo->image) }}" alt="Existing Photo" class="photo-img" style="width: 100px; height: 100px; object-fit: cover;">
+                                        <img src="{{ getFile($photo->image) }}" alt="Existing Photo" class="photo-img" style="width: 100px; height: 100px; object-fit: cover;">
                                         <button type="button" class="btn btn-danger btn-xs delete-btn" data-url="{{ route('album.photo.destroy', [$album->id, $photo->id]) }}">
                                             <i class="fa fa-trash"></i>
                                         </button>

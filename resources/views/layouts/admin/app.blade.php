@@ -15,13 +15,13 @@
     <!-- Open Graph Meta -->
     <meta property="og:title" content="{{ $meta->meta_title }}">
     <meta property="og:description" content="{{ $meta->meta_description }}">
-    <meta property="og:image" content="{{ asset($meta->og_image) }}">
+    <meta property="og:image" content="{{ getFile($meta->og_image) }}">
     <meta property="og:url" content="{{ $meta->domain }}">
     <meta property="og:type" content="website">
 
     <!-- Favicon & Logo -->
-    <link rel="shortcut icon" href="{{ asset($meta->favicon) }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset($meta->logo) }}">
+    <link rel="shortcut icon" href="{{ getFile($meta->favicon) }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ getFile($meta->logo) }}">
 
     <!-- Stylesheets -->
     <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">

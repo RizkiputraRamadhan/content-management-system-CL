@@ -57,7 +57,7 @@
                             @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <img id="imagePreview" src="{{ $video->image ? Storage::url('videos/' . $video->image) : '#' }}" alt="Image Preview" />
+                            <img id="imagePreview" src="{{ $video->image ? getFile($video->image) : '#' }}" alt="Image Preview" />
                         </div>
 
                         <div class="form-group">
@@ -169,7 +169,8 @@
                         });
                     },
                     onMediaDelete: function(target) {
-                        var imagePath = target[0].src.split('/storage/')[1];
+                         var fullUrl = target[0].src;
+                        var imagePath = fullUrl.replace(window.location.origin + '/', '');
                         Swal.fire({
                             title: 'Menghapus...',
                             text: 'Harap tunggu, gambar sedang dihapus.',

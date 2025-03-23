@@ -47,7 +47,7 @@
                                     <label>Gambar</label>
                                     <input type="file" name="image" class="form-control" accept="image/*" />
                                     @if ($user->image)
-                                        <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}" style="max-width: 100px; margin-top: 10px;">
+                                        <img src="{{ getFile($user->image) }}" alt="{{ $user->name }}" style="max-width: 100px; margin-top: 10px;">
                                         <small class="text-muted">Gambar saat ini</small>
                                     @endif
                                     @error('image')

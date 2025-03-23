@@ -48,7 +48,7 @@
                                         <td>{{ $post->title }}</td>
                                         <td>
                                             @if ($post->image)
-                                                <img src="{{ asset('storage/posts/' . $post->image) }}" alt="{{ $post->title }}" width="50">
+                                                <img src="{{ getFile($post->image) }}" alt="{{ $post->title }}" width="50">
                                             @else
                                                 <span>Tidak ada gambar</span>
                                             @endif

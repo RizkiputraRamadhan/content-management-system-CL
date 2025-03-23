@@ -15,7 +15,7 @@
                     <div class="mx-auto w-full rounded-lg shadow-sm lg:p-4 p-2 mb-2">
                         <div class="flex space-x-4">
                             <div class="size-30 rounded-lg overflow-hidden">
-                                <img src="{{ asset('storage/posts/' . $item->image) }}" alt="{{ $item->title }}"
+                                <img src="{{ getFile($item->image) }}" alt="{{ $item->title }}"
                                     class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 space-y-6">
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center space-x-2">
-                                            <img src="{{ $item->createdBy->image ? asset('storage/' . $item->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                            <img src="{{ $item->createdBy->image ? getFile($item->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                                 alt="Author" class="w-5 h-5 lg:w-10 lg:h-10 rounded-full">
                                             <div>
                                                 <a href="/author/{{ $item->createdBy->slug }}"

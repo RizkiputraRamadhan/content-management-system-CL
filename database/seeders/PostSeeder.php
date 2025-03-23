@@ -35,7 +35,7 @@ class PostSeeder extends Seeder
             'Masyarakat Antusias Sambut Malam Tahun Baru.'
         ];
 
-        $images = ['image-1.jpg', 'image-2.jpg', 'image-3.jpg', 'image-4.jpg', 'image-5.jpg', 'image-6.jpg'];
+        $images = ['assets/app/posts/image-1.jpg', 'assets/app/posts/image-2.jpg', 'assets/app/posts/image-3.jpg', 'assets/app/posts/image-4.jpg', 'assets/app/posts/image-5.jpg', 'assets/app/posts/image-6.jpg'];
         $statusList = ['active', 'inactive'];
         $userIds = [1, 2, 3, 4, 5];
 

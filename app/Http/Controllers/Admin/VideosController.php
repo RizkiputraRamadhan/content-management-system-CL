@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Video;
+use App\Helpers\FileHelper;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,8 +40,7 @@ class VideosController extends Controller
         ];
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $logoPath = $request->file('image')->store('public/videos');
-            $videoData['image'] = basename($logoPath);
+            $videoData['image'] = FileHelper::saveFile($request->file('image'), 'videos', 'image');
         } else {
             $videoData['image'] = 'default.jpg';
         }
@@ -77,9 +77,9 @@ class VideosController extends Controller
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             if ($video->image && $video->image !== 'default.jpg') {
                 Storage::disk('public')->delete('videos/' . $video->image);
+                FileHelper::deleteFile($video->image);
             }
-            $logoPath = $request->file('image')->store('public/videos');
-            $videoData['image'] = basename($logoPath);
+            $videoData['image'] = FileHelper::saveFile($request->file('image'), 'videos', 'image');
         }
 
         $video->update($videoData);

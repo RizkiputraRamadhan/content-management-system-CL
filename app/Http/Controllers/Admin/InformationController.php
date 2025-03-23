@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Models\Information;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -60,8 +61,7 @@ class InformationController extends Controller
         ];
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $imagePath = $request->file('image')->store('public/banners');
-            $informationData['image'] = basename($imagePath);
+            $informationData['image'] = FileHelper::saveFile($request->file('image'), 'banners', 'image');
         }
 
         Information::create($informationData);
@@ -110,10 +110,9 @@ class InformationController extends Controller
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             if ($information->image) {
-                Storage::disk('public')->delete('banners/' . $information->image);
+                FileHelper::deleteFile($information->image);
             }
-            $imagePath = $request->file('image')->store('public/banners');
-            $informationData['image'] = basename($imagePath);
+            $informationData['image'] = FileHelper::saveFile($request->file('image'), 'banners', 'image');
         }
 
         $information->update($informationData);
@@ -125,7 +124,7 @@ class InformationController extends Controller
     {
         $information = Information::find($id);
         if ($information->image) {
-            Storage::disk('public')->delete('banners/' . $information->image);
+            FileHelper::deleteFile($information->image);
         }
 
         $information->delete();

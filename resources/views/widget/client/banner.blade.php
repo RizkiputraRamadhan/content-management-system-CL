@@ -4,7 +4,7 @@
             <div class="mx-auto w-full rounded mb-2 relative group">
                 <div class="flex space-x-4">
                     <div class="w-full h-30 lg:h-50 rounded bg-gray-200 relative overflow-hidden">
-                        <img src="{{ asset('storage/banners/' . $item->image) }}" alt="{{ $item->title }}"
+                        <img src="{{ getFile($item->image) }}" alt="{{ $item->title }}"
                             class="w-full h-full object-cover rounded transition-opacity duration-300 group-hover:opacity-80">
                         <div
                             class="absolute inset-0 flex items-center justify-center  bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300">

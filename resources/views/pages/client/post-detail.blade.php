@@ -30,7 +30,7 @@
                                 <div class="space-y-6">
                                     <div class="flex flex-col items-start justify-between w-full md:flex-row md:items-center text-gray-600">
                                         <div class="flex items-center space-x-2">
-                                            <img src="{{ $post->createdBy->image ? asset('storage/' . $post->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                            <img src="{{ $post->createdBy->image ? getFile($post->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                                 alt="" class="w-8 h-8 rounded-full">
                                             <a href="/author/{{ $post->createdBy->slug }}"
                                                 class="text-sm font-semibold ">{{ $post->createdBy->name }}</a>
@@ -59,7 +59,7 @@
 
             <div class="lg:-mt-1 -mt-15 lg:-ml-12 lg:p-3 lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden image-container">
                 <img class="w-full rounded-sm bg-gray-900 ring-1 shadow-lg ring-gray-400/10 sm:w-[57rem] post-image"
-                    src="{{ asset('storage/posts/' . $post->image) }}" alt="">
+                    src="{{ getFile($post->image) }}" alt="">
             </div>
 
             <div class="lg:col-span-2 -mt-10 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 post-content">
@@ -82,7 +82,7 @@
                         <div class="mx-auto w-full rounded-lg shadow-sm lg:p-4 p-2 mb-2">
                             <div class="flex space-x-4">
                                 <div class="size-30 rounded-lg overflow-hidden">
-                                    <img src="{{ asset('storage/posts/' . $item->image) }}"
+                                    <img src="{{ getFile($item->image) }}"
                                         alt="{{ $item->title }}"
                                         class="w-full h-full object-cover">
                                 </div>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center space-x-2">
-                                                <img src="{{ $item->createdBy->image ? asset('storage/' . $item->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                                <img src="{{ $item->createdBy->image ? getFile($item->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                                     alt="Author"
                                                     class="w-5 h-5 lg:w-10 lg:h-10 rounded-full">
                                                 <div>

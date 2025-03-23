@@ -28,7 +28,7 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle profile waves-effect waves-light"
                             data-toggle="dropdown" aria-expanded="true"><img
-                                src="{{ Auth::user()->image ? asset('/storage/' . Auth::user()->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                src="{{ Auth::user()->image ? getFile(Auth::user()->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                 alt="user-img" class="img-circle">
                         </a>
                         <ul class="dropdown-menu">

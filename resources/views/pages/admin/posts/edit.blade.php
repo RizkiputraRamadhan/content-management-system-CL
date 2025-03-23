@@ -44,7 +44,7 @@
                             @error('image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <img id="imagePreview" src="{{ $post->image ? asset('storage/posts/' . $post->image) : '#' }}" alt="Image Preview" />
+                            <img id="imagePreview" src="{{ $post->image ? getFile($post->image) : '#' }}" alt="Image Preview" />
                         </div>
 
                         <div class="form-group">
@@ -137,7 +137,7 @@
                     }
                     reader.readAsDataURL(file);
                 } else {
-                    preview.attr('src', '{{ $post->image ? asset('storage/' . $post->image) : '#' }}');
+                    preview.attr('src', '{{ $post->image ? getFile($post->image) : '#' }}');
                     preview.css('display', '{{ $post->image ? 'block' : 'none' }}');
                 }
             });
@@ -198,7 +198,8 @@
                     },
 
                     onMediaDelete: function(target) {
-                        var imagePath = target[0].src.split('/storage/')[1];
+                         var fullUrl = target[0].src;
+                        var imagePath = fullUrl.replace(window.location.origin + '/', '');
 
                         Swal.fire({
                             title: 'Menghapus...',

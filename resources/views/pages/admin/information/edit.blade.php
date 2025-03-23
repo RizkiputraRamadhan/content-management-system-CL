@@ -55,7 +55,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                             @if ($information->image)
-                                <img id="imagePreview" src="{{ asset('storage/banners/'. $information->image) }}" alt="Current Image" style="display: block;" />
+                                <img id="imagePreview" src="{{ getFile($information->image) }}" alt="Current Image" style="display: block;" />
                             @else
                                 <img id="imagePreview" src="#" alt="Image Preview" />
                             @endif
@@ -158,7 +158,8 @@
                         });
                     },
                     onMediaDelete: function(target) {
-                        var imagePath = target[0].src.split('/storage/')[1];
+                         var fullUrl = target[0].src;
+                        var imagePath = fullUrl.replace(window.location.origin + '/', '');
                         Swal.fire({
                             title: 'Menghapus...',
                             text: 'Harap tunggu, gambar sedang dihapus.',

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class UploadImageEditor extends Controller
@@ -13,8 +17,16 @@ class UploadImageEditor extends Controller
     {
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->store('public/images');
-            $url = Storage::url($path);
+            $randomName = 'image_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $path = public_path('assets/app/image-editor');
+
+            // Pastikan folder ada
+            if (!File::exists($path)) {
+                File::makeDirectory($path, 0777, true);
+            }
+
+            $file->move($path, $randomName);
+            $url = asset('assets/app/image-editor/' . $randomName);
 
             return response()->json(['url' => $url], 200);
         }
@@ -24,9 +36,8 @@ class UploadImageEditor extends Controller
     public function deleteImage(Request $request)
     {
         $imagePath = $request->input('image_path');
-
-        if (Storage::exists('public/' . $imagePath)) {
-            Storage::delete('public/' . $imagePath);
+        if ($imagePath && File::exists(public_path($imagePath))) {
+            File::delete(public_path($imagePath));
             return response()->json(['success' => 'Image deleted successfully'], 200);
         }
 

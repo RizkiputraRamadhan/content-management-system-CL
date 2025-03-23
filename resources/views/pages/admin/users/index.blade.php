@@ -49,7 +49,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>
                                             @if ($user->image)
-                                                <img src="{{ asset('storage/' . $user->image) }}" alt="{{ $user->name }}"
+                                                <img src="{{ getFile($user->image) }}" alt="{{ $user->name }}"
                                                     style="max-width: 50px;">
                                             @else
                                                 Tidak Ada Gambar

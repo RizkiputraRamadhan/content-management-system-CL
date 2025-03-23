@@ -26,7 +26,7 @@
                         <section class="carousel-slide duration-700 ease-in-out hidden" data-carousel-news>
                             <!-- Carousel wrapper -->
                             <div class="relative h-40 overflow-hidden rounded-lg md:h-96">
-                                <img src="{{ asset('storage/posts/' . $item->image) }}"
+                                <img src="{{ getFile($item->image) }}"
                                     class="block w-full h-full object-cover" alt="slide-image">
                             </div>
                             <div class="relative">
@@ -118,7 +118,7 @@
                     <div class="mx-auto w-full rounded-md p-2 mb-2">
                         <div class="flex space-x-4">
                             <div class="size-20 rounded overflow-hidden">
-                                <img src="{{ asset('storage/posts/' . $item->image) }}" alt="{{ $item->title }}"
+                                <img src="{{ getFile($item->image) }}" alt="{{ $item->title }}"
                                     class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 flex flex-col justify-between">
@@ -183,7 +183,7 @@
                             <div class="mx-auto w-full rounded-lg shadow-sm lg:p-4 p-2 mb-2">
                                 <div class="flex space-x-4">
                                     <div class="size-30 rounded-lg overflow-hidden">
-                                        <img src="{{ asset('storage/posts/' . $item->image) }}"
+                                        <img src="{{ getFile($item->image) }}"
                                             alt="{{ $item->title }}" class="w-full h-full object-cover">
                                     </div>
                                     <div class="flex-1 space-y-6">
@@ -227,7 +227,7 @@
                                             </div>
                                             <div class="flex items-center justify-between">
                                                 <div class="flex items-center space-x-2">
-                                                    <img src="{{ $item->createdBy->image ? asset('storage/' . $item->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                                                    <img src="{{ $item->createdBy->image ? getFile($item->createdBy->image) : asset('dist/images/users/avatar-1.jpg') }}"
                                                         alt="Author" class="w-5 h-5 lg:w-10 lg:h-10 rounded-full">
                                                     <div>
                                                         <a href="/author/{{ $item->createdBy->slug }}"

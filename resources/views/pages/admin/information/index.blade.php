@@ -60,7 +60,7 @@
                                                 Lihat</a></td>
                                         <td>
                                             @if ($post->image)
-                                                <img src="{{ asset('storage/banners/' . $post->image) }}"
+                                                <img src="{{ getFile($post->image) }}"
                                                     alt="{{ $post->title }}" width="50">
                                             @else
                                                 <span>Tidak ada gambar</span>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Helpers\FileHelper;
 use App\Models\WebIdentity;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class WebIdentityController extends Controller
 {
@@ -54,21 +55,18 @@ class WebIdentityController extends Controller
 
         // Handle favicon upload
         if ($request->hasFile('favicon') && $request->file('favicon')->isValid()) {
-            $faviconPath = $request->file('favicon')->store('public/web-identities');
-            $data['favicon'] = basename($faviconPath); 
+            $data['favicon'] = FileHelper::saveFile($request->file('favicon'), 'web-identities', 'favicon');
         }
-
+        
         // Handle logo upload
         if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
-            $logoPath = $request->file('logo')->store('public/web-identities');
-            $data['logo'] = basename($logoPath); 
+            $data['logo'] = FileHelper::saveFile($request->file('logo'), 'web-identities', 'logo');
         }
-
+        
         // Handle og_image upload
         if ($request->hasFile('og_image') && $request->file('og_image')->isValid()) {
-            $ogImagePath = $request->file('og_image')->store('public/web-identities');
-            $data['og_image'] = basename($ogImagePath); 
-        }
+            $data['og_image'] = FileHelper::saveFile($request->file('og_image'), 'web-identities', 'og_image');
+        }        
 
         $webIdentity = WebIdentity::first();
         if ($webIdentity) {

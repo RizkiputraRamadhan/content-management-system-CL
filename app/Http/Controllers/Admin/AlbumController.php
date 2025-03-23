@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Album;
 use App\Models\AlbumPhoto;
+use App\Helpers\FileHelper;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -53,9 +54,9 @@ class AlbumController extends Controller
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
                     if ($photo->isValid()) {
-                        $path = $photo->store('public/albums/' . $album->id);
+                        $filename = FileHelper::saveFile($photo, 'albums/' . $album->id, 'album_photo');
                         AlbumPhoto::create([
-                            'image' => basename($path),
+                            'image' => $filename,
                             'album_id' => $album->id,
                         ]);
                     }
@@ -113,19 +114,21 @@ class AlbumController extends Controller
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
                     if ($photo->isValid()) {
-                        $path = $photo->store('public/albums/' . $album->id);
+                        $filename = FileHelper::saveFile($photo, 'albums/' . $album->id, 'album_photo');
                         AlbumPhoto::create([
-                            'image' => basename($path),
+                            'image' => $filename,
                             'album_id' => $album->id,
                         ]);
                     }
                 }
+
                 return response()->json([
                     'success' => true,
-                    'message' => 'Album updated successfully',
+                    'message' => 'Album created successfully',
                     'redirect' => route('album.index'),
                 ]);
             }
+
             return redirect()->route('album.index')->with('success', 'Album updated successfully');
         } catch (\Exception $e) {
             return response()->json(
@@ -137,11 +140,12 @@ class AlbumController extends Controller
             );
         }
     }
+    
     public static function destroyPhoto($albumId, $photoId)
     {
         $photo = AlbumPhoto::where('album_id', $albumId)->findOrFail($photoId);
         $photo->delete();
-        Storage::delete('public/albums/' . $albumId . '/' . $photo->image);
+        FileHelper::deleteFile($photo->image);
 
         return response()->json(['message' => 'Foto berhasil dihapus']);
     }

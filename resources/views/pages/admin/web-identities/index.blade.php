@@ -106,9 +106,10 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select name="status" class="form-control">
+                                        <option value="" selected disabled>-- pilih --</option>
                                         <option value="active"
-                                            {{ old('status', $webIdentity->status ?? 'active') === 'active' ? 'selected' : '' }}>
-                                            Active</option>
+                                        {{ old('status', $webIdentity->status ?? 'active') === 'active' ? 'selected' : '' }}>
+                                        Active</option>
                                         <option value="inactive"
                                             {{ old('status', $webIdentity->status ?? 'active') === 'inactive' ? 'selected' : '' }}>
                                             Inactive</option>
@@ -157,7 +158,7 @@
                                     <input type="file" name="og_image" id="og_image" class="form-control"
                                         accept="image/*">
                                     <img id="og_image_preview"
-                                        src="{{ $webIdentity && $webIdentity->og_image ? asset('storage/web-identities/' . $webIdentity->og_image) : '' }}"
+                                        src="{{ $webIdentity && $webIdentity->og_image ? getFile($webIdentity->og_image) : '' }}"
                                         alt="OG Image Preview"
                                         style="max-width: 200px; margin-top: 10px; {{ !$webIdentity || !$webIdentity->og_image ? 'display:none;' : '' }}">
                                     @error('og_image')
@@ -170,7 +171,7 @@
                                     <input type="file" name="favicon" id="favicon" class="form-control"
                                         accept="image/*">
                                     <img id="favicon_preview"
-                                        src="{{ $webIdentity && $webIdentity->favicon ? asset('storage/web-identities/' . $webIdentity->favicon) : '' }}"
+                                        src="{{ $webIdentity && $webIdentity->favicon ? getFile($webIdentity->favicon) : '' }}"
                                         alt="Favicon Preview"
                                         style="max-width: 50px; margin-top: 10px; {{ !$webIdentity || !$webIdentity->favicon ? 'display:none;' : '' }}">
                                     @error('favicon')
@@ -183,7 +184,7 @@
                                     <input type="file" name="logo" id="logo" class="form-control"
                                         accept="image/*">
                                     <img id="logo_preview"
-                                        src="{{ $webIdentity && $webIdentity->logo ? asset('storage/web-identities/' . $webIdentity->logo) : '' }}"
+                                        src="{{ $webIdentity && $webIdentity->logo ? getFile($webIdentity->logo) : '' }}"
                                         alt="Logo Preview"
                                         style="max-width: 100px; margin-top: 10px; {{ !$webIdentity || !$webIdentity->logo ? 'display:none;' : '' }}">
                                     @error('logo')

@@ -2,7 +2,7 @@
     <div class="sidebar-inner slimscrollleft">
         <div class="user-details">
             <div class="text-center">
-                <img src="{{ Auth::user()->image ? asset('/storage/' . Auth::user()->image) : asset('dist/images/users/avatar-1.jpg') }}"
+                <img src="{{ Auth::user()->image ? getFile(Auth::user()->image) : asset('dist/images/users/avatar-1.jpg') }}"
                     alt="" class="img-circle">
             </div>
             <div class="user-info">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FileHelper;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class UserController extends Controller
         $userData['password'] = Hash::make($request->password);
 
         if ($request->hasFile('image')) {
-            $userData['image'] = $request->file('image')->store('user-images', 'public');
+            $userData['image'] = FileHelper::saveFile($request->file('image'), 'user-images', 'image');
         }
 
         $user = User::create($userData);
@@ -79,9 +80,9 @@ class UserController extends Controller
 
         if ($request->hasFile('image')) {
             if ($user->image) {
-                Storage::disk('public')->delete($user->image);
+                FileHelper::deleteFile($user->image);
             }
-            $userData['image'] = $request->file('image')->store('user-images', 'public');
+            $userData['image'] = FileHelper::saveFile($request->file('image'), 'user-images', 'image');
         }
 
         $user->update($userData);
@@ -94,7 +95,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->image) {
-            Storage::disk('public')->delete($user->image);
+            FileHelper::deleteFile($user->image);
         }
 
         $user->delete();
@@ -134,9 +135,9 @@ class UserController extends Controller
 
         if ($request->hasFile('image')) {
             if ($user->image) {
-                Storage::disk('public')->delete($user->image);
+                FileHelper::deleteFile($user->image);
             }
-            $userData['image'] = $request->file('image')->store('user-images', 'public');
+            $userData['image'] = FileHelper::saveFile($request->file('image'), 'user-images', 'image');
         }
 
         $user->update($userData);

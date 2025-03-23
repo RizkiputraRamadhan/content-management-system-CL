@@ -31,10 +31,10 @@
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-5">
                 @foreach ($item->photos as $row)
                     <div>
-                        <a href="{{ asset('storage/albums/' . $item->id . '/' . $row->image) }}"
+                        <a href="{{ getFile($row->image) }}"
                             data-lightbox="{{ $row->album_id }}" data-title="{{ $item->name ?? 'Galery Image' }}">
                             <img class="object-cover object-center w-full h-40 max-w-full rounded-lg"
-                                src="{{ asset('storage/albums/' . $item->id . '/' . $row->image) }}" alt="gallery-photo" />
+                                src="{{ getFile($row->image) }}" alt="gallery-photo" />
                         </a>
                     </div>
                 @endforeach
