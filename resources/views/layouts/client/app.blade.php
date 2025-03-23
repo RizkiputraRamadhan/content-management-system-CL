@@ -49,6 +49,8 @@
     </div>
 </body>
 {{-- stack script --}}
+<script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+
 @stack('scripts')
 
 </html>

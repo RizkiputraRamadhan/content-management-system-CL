@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Posts;
-use App\Models\PostCategory;
 use App\Models\PostTags;
 use Illuminate\Support\Str;
+use App\Models\PostCategory;
+use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
 {
@@ -37,8 +38,7 @@ class PostSeeder extends Seeder
 
         $images = ['assets/app/posts/image-1.jpg', 'assets/app/posts/image-2.jpg', 'assets/app/posts/image-3.jpg', 'assets/app/posts/image-4.jpg', 'assets/app/posts/image-5.jpg', 'assets/app/posts/image-6.jpg'];
         $statusList = ['active', 'inactive'];
-        $userIds = [1, 2, 3, 4, 5];
-
+        $userIds = User::pluck('id')->toArray();
         $categories = PostCategory::all();
         $tags = PostTags::all();
 
