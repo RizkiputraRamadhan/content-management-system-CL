@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class LoginController extends Controller
         if (Auth::check()) {
             return redirect('/portal/home')->with('info', 'Anda masih login, pastikan logout untuk login akun lain.');
         }
-        
+
         return view('pages.auth.login');
     }
 
@@ -22,32 +23,44 @@ class LoginController extends Controller
     {
         $this->ensureIsNotRateLimited($request);
 
-        $credentials = $request->validate([
-            'email' => ['required', 'email', 'max:255'],
-            'password' => ['required', 'string', 'min:3'],
-        ], [
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.max' => 'Email maksimal 255 karakter.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password minimal 3 karakter.',
-        ]);
+        $credentials = $request->validate(
+            [
+                'email' => ['required', 'email', 'max:255'],
+                'password' => ['required', 'string', 'min:3'],
+            ],
+            [
+                'email.required' => 'Email wajib diisi.',
+                'email.email' => 'Format email tidak valid.',
+                'email.max' => 'Email maksimal 255 karakter.',
+                'password.required' => 'Password wajib diisi.',
+                'password.min' => 'Password minimal 3 karakter.',
+            ],
+        );
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            RateLimiter::hit($this->throttleKey($request));
+            return back()->with('error', 'Email atau password salah. Silakan coba lagi.');
+        }
+
+        if ($user->status !== 'active') {
+            return back()->with('error', 'Akun Anda tidak aktif. Silakan hubungi admin.');
+        }
 
         $remember = $request->boolean('remember-me');
 
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            
+
             RateLimiter::clear($this->throttleKey($request));
-            
-            return redirect()->intended('/portal/home')
-                ->with('success', 'Login berhasil! Selamat datang kembali.');
+
+            return redirect()->intended('/portal/home')->with('success', 'Login berhasil! Selamat datang kembali.');
         }
 
         RateLimiter::hit($this->throttleKey($request));
 
-        return back()
-            ->with('error', 'Email atau password salah. Silakan coba lagi.');
+        return back()->with('error', 'Email atau password salah. Silakan coba lagi.');
     }
 
     protected function ensureIsNotRateLimited(Request $request)
@@ -74,7 +87,7 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
-        return redirect('/portal')->with('success', 'Anda telah logout dari sistem.');
+
+        return redirect('/portal/login')->with('success', 'Anda telah logout dari sistem.');
     }
 }
